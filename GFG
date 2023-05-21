@@ -1,0 +1,98 @@
+
+import java.util.*;
+ 
+class GFG
+{
+static class Queue
+{
+    static Stack&lt;Integer&gt; s1 = new Stack&lt;Integer&gt;();
+    static Stack&lt;Integer&gt; s2 = new Stack&lt;Integer&gt;();
+ 
+    static void enQueue(int x)
+    {
+        // Move all elements from s1 to s2
+        while (!s1.isEmpty())
+        {
+            s2.push(s1.pop());
+        }
+ 
+        // Push item into s1
+        s1.push(x);
+ 
+        // Push everything back to s1
+        while (!s2.isEmpty())
+        {
+            s1.push(s2.pop());
+            //s2.pop();
+        }
+    }
+ 
+    static int deQueue()
+    {
+        if (s1.isEmpty())
+        {
+            System.out.println(&quot;Q is Empty&quot;);
+            System.exit(0);
+        }
+ 
+        // Return top of s1
+        int x = s1.peek();
+        s1.pop();
+        return x;
+    }
+public boolean isEmpty() {// queue is Empty
+// both stacks should be empty
+if (s1.empty() == true &amp;&amp; s2.empty() == true)
+return true;
+return false; }
+
+public int size() { // queue`s size
+return (s1.size());
+}
+// return the first element in the queue without removing it
+public E first() {
+// functionality similar to dequeue
+if (s2.empty() == false) {
+return s2.peek(); }
+else {
+if
+(s1.empty() == false) {
+while (s1.empty() == false) {
+s2.push(s1.pop()); }
+return s2.peek(); }
+else
+return null; }
+}
+// Return string that represent the element of queue
+public String toString() {
+String st1 = &quot;&quot;;
+// store in reverse order
+for (E item : s1) {
+st1 = item.toString() + ((st1.length() &gt; 0) ? &quot;, &quot; : &quot;&quot;) + st1; }
+String st2 = &quot;&quot;;
+for (E item : s2) { st2 =st2 + ((st2.length() &gt; 0) ? &quot;, &quot; : &quot;&quot;) +
+item.toString(); }
+if (s1.size() &gt; 0 &amp;&amp; s2.size() &gt; 0) {
+String result = &quot;[&quot; + st1+ &quot;, &quot; + st2 + &quot;]&quot;;
+return result; }
+else if (s1.size() &gt; 0) {
+return &quot;[&quot; + st1+ &quot;]&quot;; }
+else {
+return &quot;[&quot; + st2 + &quot;]&quot;; } } }
+}
+ 
+public static void main(String[] args)
+{
+    Queue q = new Queue();
+    q.enQueue(1);
+    q.enQueue(2);
+    q.enQueue(3);
+ 
+    System.out.println(q.deQueue());
+    System.out.println(q.deQueue());
+    System.out.println(q.deQueue());
+
+System.out.println(q.first());
+System.out.println(q.toString());
+}
+}
